@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <title>Interfaz básica con PyScript</title>
 
-    <!-- 🔹 OBLIGATORIO para PyScript en GitHub Pages -->
+    <!-- Configuración necesaria para que PyScript funcione en GitHub Pages -->
     <script type="text/javascript">
         window.languagePluginUrl = "https://cdn.jsdelivr.net/pyodide/v0.26.2/full/";
     </script>
 
-    <!-- 🔸 Versión recomendada de PyScript -->
+    <!-- Cargar PyScript (versión estable) -->
     <script defer src="https://pyscript.net/releases/2024.9.2/pyscript.js"></script>
 </head>
 <body>
 
-<h2>Ejemplo PyScript con archivo separado</h2>
+<h2>Ejemplo PyScript funcionando en GitHub Pages</h2>
 
 <!-- Input para ingresar un número -->
 <input id="numero" type="number" placeholder="Ingresa un número">
@@ -23,24 +23,23 @@
 <!-- Zona donde se mostrará el resultado -->
 <div id="resultado" style="margin-top:10px; font-weight:bold;"></div>
 
-<!-- Cargar el archivo main.py -->
-<py-script src="main.py"></py-script>
-
-<script type="py">
+<!-- Código Python -->
+<py-script>
 from pyscript import Element
-from main import calcular_doble
 
+# Función que calcula el doble
+def calcular_doble(x):
+    return int(x) * 2
 
+# Función que se ejecuta al hacer clic
 def ejecutar(event):
-    valor = Element("numero").value    # Obtener valor del input
-    resultado = calcular_doble(valor)  # Ejecutar función definida en main.py
+    valor = Element("numero").value
+    resultado = calcular_doble(valor)
     Element("resultado").write(f"El doble es: {resultado}")
-    print("Valor recibido:", valor)
 
-
-# Conectar el botón a la función
+# Conectar el botón con la función
 Element("btn_calcular").element.onclick = ejecutar
-</script>
+</py-script>
 
 </body>
 </html>
