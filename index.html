@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+</head>
+<body>
+
+<h2>Ejemplo de input</h2>
+
+<input id="nombre" type="text" placeholder="Escribe tu nombre">
+<button id="btn">Saludar</button>
+
+<div id="salida"></div>
+
+<py-script>
+from pyscript import Element
+
+def saludar(event):
+    nombre = Element("nombre").value      # obtener valor del input
+    Element("salida").write(f"Hola, {nombre}!")
+
+Element("btn").element.onclick = saludar
+</py-script>
+
+</body>
+</html>
