@@ -35,6 +35,7 @@ def ejecutar(event):
     valor = Element("numero").value    # Obtener valor del input
     resultado = calcular_doble(valor)  # Ejecutar función definida en main.py
     Element("resultado").write(f"El doble es: {resultado}")
+    print("Valor recibido:", valor)
 
 
 # Conectar el botón a la función
