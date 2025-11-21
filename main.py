@@ -12,5 +12,5 @@ def translate_english(event):
 def translate_español(event):
     input_text = document.querySelector("#español")
     english = input_text.value
-    output_div = document.querySelector("#output")
+    output_div = document.querySelector("#output2")
     output_div.innerText = arrr.translate(english)
