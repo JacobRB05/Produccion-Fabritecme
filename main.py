@@ -8,3 +8,9 @@ def translate_english(event):
     english = input_text.value
     output_div = document.querySelector("#output")
     output_div.innerText = arrr.translate(english)
+    
+def translate_español(event):
+    input_text = document.querySelector("#español")
+    english = input_text.value
+    output_div = document.querySelector("#output")
+    output_div.innerText = arrr.translate(english)
