@@ -3,15 +3,9 @@ import arrr
 from pyscript import document
 
 
-def translate_english(event):
-    input_text = document.querySelector("#english")
-    english = input_text.value
+def funcion1(event):
+    input_text = document.querySelector("#button1")
+    value1 = input_text.value
     output_div = document.querySelector("#output")
-    output_div.innerText = arrr.translate(english) + "I love you mateeee"
+    output_div.innerHTML = f"El valor ingresado es: {int(value1)**2}"
     
-def translate_español(event):
-    input_text = document.querySelector("#español")
-    english = input_text.value
-    output_div = document.querySelector("#output2")
-    res = arrr.translate(english) + "Te amo mateeee"
-    output_div.innerText = res
