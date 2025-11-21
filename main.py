@@ -1,10 +1,10 @@
-def calcular_doble(valor):
-    """
-    Función sencilla para demostrar que el código
-    se ejecuta desde un archivo Python externo.
-    """
-    try:
-        valor = int(valor)
-        return valor * 2
-    except:
-        return "Entrada no válida"
+
+import arrr
+from pyscript import document
+
+
+def translate_english(event):
+    input_text = document.querySelector("#english")
+    english = input_text.value
+    output_div = document.querySelector("#output")
+    output_div.innerText = arrr.translate(english)

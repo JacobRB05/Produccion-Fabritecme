@@ -1,48 +1,19 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Interfaz básica con PyScript</title>
-
-    <!-- 🔹 OBLIGATORIO para PyScript en GitHub Pages -->
-    <script type="text/javascript">
-        window.languagePluginUrl = "https://cdn.jsdelivr.net/pyodide/v0.26.2/full/";
-    </script>
-
-    <!-- 🔸 Versión recomendada de PyScript -->
-    <script defer src="https://pyscript.net/releases/2024.9.2/pyscript.js"></script>
-</head>
+<html>
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width,initial-scale=1" />
+      <title>🦜 Polyglot - Piratical PyScript</title>
+      <link rel="stylesheet" href="https://pyscript.net/releases/2025.11.1/core.css">
+      <script type="module" src="https://pyscript.net/releases/2025.11.1/core.js"></script>
+  </head>
 <body>
-
-<h2>Ejemplo PyScript con archivo separado</h2>
-
-<!-- Input para ingresar un número -->
-<input id="numero" type="number" placeholder="Ingresa un número">
-<button id="btn_calcular">Calcular Doble</button>
-
-<!-- Zona donde se mostrará el resultado -->
-<div id="resultado" style="margin-top:10px; font-weight:bold;"></div>
-
-<!-- Cargar el archivo main.py -->
-<py-script src="main.py"></py-script>
-
-<script type="py">
-from pyscript import Element
-from main import calcular_doble
-
-
-def ejecutar(event):
-    valor = Element("numero").value    # Obtener valor del input
-    print(valor)
-    resultado = calcular_doble(valor)  # Ejecutar función definida en main.py
-    print(resutlado)
-    Element("resultado").write(f"El doble es: {resultado}")
-    
-
-
-# Conectar el botón a la función
-Element("btn_calcular").element.onclick = ejecutar
-</script>
-
+  <h1>Polyglot 🦜 💬 🇬🇧 ➡️ 🏴‍☠️</h1>
+  <p>Translate English into Pirate speak...</p>
+  <input type="text" name="english" id="english" placeholder="Type English here..." />
+  <button py-click="translate_english">Translate</button>
+  <div id="output"></div>
+  <script type="py" src="./main.py" config="./pyscript.json"></script>
 </body>
+
 </html>
