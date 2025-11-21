@@ -33,7 +33,9 @@ from main import calcular_doble
 
 def ejecutar(event):
     valor = Element("numero").value    # Obtener valor del input
+    print(valor)
     resultado = calcular_doble(valor)  # Ejecutar función definida en main.py
+    print(resutlado)
     Element("resultado").write(f"El doble es: {resultado}")
     
 
