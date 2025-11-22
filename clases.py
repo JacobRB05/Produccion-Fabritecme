@@ -1,4 +1,11 @@
 
+class Pieza:
+    nombrePieza:str
+    material: str
+
+    def __init__(self, nombrePieza:str, material:str):
+        self.nombrePieza = nombrePieza
+        self.material = material
 
 
 class ProcesoCorte:
@@ -8,22 +15,27 @@ class ProcesoCorte:
     DiametroFinalPieza:int
     ProfundidadPasada:int
     VolumenVirutaRemovido:int
-    
-    def __init__(self, nombreProceso:str, DiametroInicialPieza:int, DiametroFinalPieza:int, ProfundidadPasada:int, VolumenVirutaRemovido:int):
+    pieza:Pieza
+
+    def __init__(self, nombreProceso:str, DiametroInicialPieza:int, DiametroFinalPieza:int, pieza:Pieza):
         self.nombreProceso = nombreProceso
         self.DiametroInicialPieza = DiametroInicialPieza
         self.DiametroFinalPieza = DiametroFinalPieza
-        self.ProfundidadPasada = ProfundidadPasada
-        self.VolumenVirutaRemovido = VolumenVirutaRemovido
+        self.pieza = pieza
+        self.ProfundidadPasada = (DiametroInicialPieza - DiametroFinalPieza) / 2
+        
+
+
+    
+    def __init__(self, nombreProceso:str, DiametroInicialPieza:int, DiametroFinalPieza:int, pieza:Pieza):
+        self.nombreProceso = nombreProceso
+        self.DiametroInicialPieza = DiametroInicialPieza
+        self.DiametroFinalPieza = DiametroFinalPieza
+        self.ProfundidadPasada = (DiametroInicialPieza - DiametroFinalPieza) / 2
+
         
     
     
-class Pieza:
-    nombrePieza:str
-    material: str
-
-    def __init__(self, nombrePieza:str):
-        self.nombrePieza = nombrePieza
 
     
     
@@ -42,5 +54,10 @@ class MaquinaCorte:
     def agregarMaterial(self, material:str, velocidadCorte:int, avancePorRevolucion:int):
         self.velocidadCorte[material] = velocidadCorte
         self.avancePorRevolucion[material] = avancePorRevolucion
-    
-   
+
+    def getVelocidadMaterial(self,material:str):
+        return self.velocidadCorte[material]
+
+    def getAvancePorRevolucion(self,material:str):
+        return self.avancePorRevolucion[material]
+
