@@ -1,13 +1,10 @@
 import clases
-
-procesoActual = 0
-
 from clases import ProcesoCorte
 from clases import Pieza
 from clases import MaquinaCorte
 
 
-
+# Mapas para almacenar las instancias de piezas, maquinas y procesos
 mapaProcesos = {}
 mapaMaquinas = {}
 mapaPiezas = {}
