@@ -45,18 +45,20 @@ def ejecutar(event):
         return
 
     # Llamada a tu método principal
-    resultado = metodos.main(
-        datos["nombre_material"],
-        datos["nombre_maquina"],
-        datos["diametro_inicial"],
-        datos["diametro_final"],
-        datos["longitud_corte"],
-        datos["velocidad"],
-        datos["avance"],
-        datos["fuerza"]
+resultado = metodos.main(
+    "Pieza",                     # nombre de la pieza (puedes poner otro)
+    datos["nombre_material"],    # material de la pieza
+    datos["diametro_inicial"],
+    datos["diametro_final"],
+    datos["longitud_corte"],
+    datos["nombre_maquina"],
+    datos["velocidad"],
+    datos["avance"],
+    datos["fuerza"]
     )
 
-    pyscript.write("resultado", resultado)
+
+pyscript.write("resultado", resultado)
 
 
 # ======== ENLAZAR EVENTOS ========
