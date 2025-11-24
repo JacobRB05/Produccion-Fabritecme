@@ -8,14 +8,6 @@
     <link rel="stylesheet" href="https://pyscript.net/releases/2025.11.1/core.css">
     <script type="module" src="https://pyscript.net/releases/2025.11.1/core.js"></script>
 
-    <!-- CONFIG -->
-    <py-config>
-    {
-        "packages": [],
-        "paths": ["./"]   // IMPORTANTE para poder usar metodos.py y clases.py
-    }
-    </py-config>
-
     <style>
         body { font-family: Arial; padding: 20px; }
         .bloque {
@@ -47,19 +39,9 @@
 
     <label>Longitud de Corte (mm)</label><br>
     <input id="longitudCorte" type="number" value="100"><br>
-
-    <button class="btn" id="btnGuardarPieza">Guardar Pieza</button>
+    <button py-click="guardarPieza">Guardar Pieza</button>
 </div>
 
-<!-- ⚙️ MÁQUINA -->
-<div class="bloque">
-    <h2>⚙️ Parámetros de la Máquina</h2>
-
-    <label>Nombre de la Máquina</label><br>
-    <input id="nombreMaquina" type="text" value="Torno CNC"><br>
-
-    <button class="btn" id="btnGuardarMaquina">Guardar Máquina</button>
-</div>
 
 <!-- 🧱 MATERIAL -->
 <div class="bloque">
@@ -77,16 +59,25 @@
     <label>Fuerza de Corte (N)</label><br>
     <input id="fuerzaCorteMaterial" type="number" value="500"><br>
 
-    <button class="btn" id="btnGuardarMaterial">Guardar Material</button>
+    <button py-click="guardarMaterial">Guardar Material</button>
+</div>
+
+<!-- ⚙️ MÁQUINA -->
+<div class="bloque">
+    <h2>⚙️ Parámetros de la Máquina</h2>
+
+    <label>Nombre de la Máquina</label><br>
+    <input id="nombreMaquina" type="text" value="Torno CNC"><br>
+
+    <button py-click="guardarMaquina">Guardar Maquina</button>
 </div>
 
 <h2>Ejecutar proceso</h2>
-<button id="btnEjecutar" class="btn">Calcular y Mostrar</button>
-
+<button py-click="main">Calcular</button>
 <div id="resultado"></div>
 
 <!-- CARGAR MAIN -->
-<script type="py" src="main.py"></script>
+  <script type="py" src="./main.py" config="./pyscript.json"></script>
 
 </body>
 </html>

@@ -72,16 +72,13 @@ def main(nombrePieza:str, materialPieza:str, diametroInicial:float, diametroFina
     return getmsg()
 
 if __name__ == "__main__":
-    #inputs
-
+    #inputs de prueba
         #Parametros Pieza
     diametroInicial = 50
     diametroFinal = 30
-    longitudCorte = 100
-    
+    longitudCorte = 100 
     nombrePieza = "Pieza"
     materialPieza = "Acero"
-
         #Parametros Maquina
     nombreMaquina = "Torno CNC"
         #Parametros Material
