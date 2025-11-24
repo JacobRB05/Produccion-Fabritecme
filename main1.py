@@ -1,9 +1,8 @@
 
-import arrr
 from pyscript import document
 
 
-def funcion1(event):
+def guardarPieza(event):
     input_nombrePieza = document.querySelector("#nombrePieza")
     nombrePieza = input_nombrePieza.value
     output_div = document.querySelector("#output")  
