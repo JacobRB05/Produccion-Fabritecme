@@ -19,10 +19,10 @@ avanceMaterial: float
 fuerza_corte_material: int
 
 def guardarMaterial(event):
-    global nombre_material, velocidad_corte_material, avance_por_revolucion_material, fuerza_corte_material
+    global nombre_material, velocidad_corte_material, avanceMaterial, fuerza_corte_material
     nombre_material = document.querySelector("#nombreMaterial").value
     velocidad_corte_material = int(document.querySelector("#velocidadCorteMaterial").value)
-    avance_por_revolucion_material = float(document.querySelector("#avancePorRevolucionMaterial").value)
+    avanceMaterial = float(document.querySelector("#avanceMaterial").value)
     fuerza_corte_material = int(document.querySelector("#fuerzaCorteMaterial").value)
     
     
@@ -42,7 +42,7 @@ def main():
         longitud_corte,
         nombre_maquina,
         velocidad_corte_material,
-        avance_por_revolucion_material,
+        avanceMaterial,
         fuerza_corte_material
     )
 
