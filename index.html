@@ -9,34 +9,15 @@
     <script type="module" src="https://pyscript.net/releases/2025.11.1/core.js"></script>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
+        body { font-family: Arial; padding: 20px; }
         .bloque {
-            border: 2px solid #555;
-            border-radius: 8px;
-            padding: 15px;
+            border: 2px solid #555; border-radius: 8px; padding: 15px;
             margin-bottom: 20px;
         }
-        .bloque h2 {
-            margin-top: 0;
-        }
-        input {
-            margin: 5px 0;
-            width: 180px;
-            padding: 4px;
-        }
-        .btn {
-            padding: 6px 12px;
-            margin-top: 5px;
-            cursor: pointer;
-        }
-        #output {
-            margin-top: 30px;
-            padding: 20px;
-            border: 2px dashed #333;
-            background:#fafafa;
+        input { width: 180px; margin: 4px 0; padding: 5px; }
+        .btn { padding: 6px 12px; margin-top: 5px; cursor: pointer; }
+        #resultado {
+            border: 1px dashed #000; padding: 15px; margin-top: 20px; min-height: 30px;
         }
     </style>
 </head>
@@ -60,7 +41,7 @@
     <label>Longitud de Corte (mm)</label><br>
     <input id="longitudCorte" type="number" value="100"><br>
 
-    <button class="btn" py-click="guardarPieza">Guardar Parámetros de Pieza</button>
+    <button class="btn" id="btnGuardarPieza">Guardar Pieza</button>
 </div>
 
 
@@ -73,7 +54,7 @@
     <label>Nombre de la Máquina</label><br>
     <input id="nombreMaquina" type="text" value="Torno CNC"><br>
 
-    <button class="btn" py-click="guardarMaquina">Guardar Parámetros de Máquina</button>
+    <button class="btn" id="btnGuardarMaquina">Guardar Máquina</button>
 </div>
 
 
@@ -95,19 +76,17 @@
     <label>Fuerza de Corte (N)</label><br>
     <input id="fuerzaCorteMaterial" type="number" value="500"><br>
 
-    <button class="btn" py-click="guardarMaterial">Guardar Parámetros del Material</button>
+    <button class="btn" id="btnGuardarMaterial">Guardar Material</button>
 </div>
 
 
 <!-- ================== EJECUTAR MAIN ================== -->
-  <h2>Ejecutar proceso</h2>
-  <button py-click="ejecutar">Calcular y mostrar</button>
+<h2>Ejecutar proceso</h2>
+<button id="btnEjecutar" class="btn">Calcular y Mostrar</button>
 
-  <div id="resultado" style="border:1px solid #000; padding:10px; margin-top:10px;">
-  </div>
+<div id="resultado"></div>
 
-
-  <script type="py" src="./main.py"></script>
+<script type="py" src="main.py"></script>
 
 </body>
 </html>

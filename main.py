@@ -1,103 +1,66 @@
-from pyscript import Element
+import js
+import pyscript
 import metodos
 
-# =============== VARIABLES GLOBALES =================
-# Pieza
-nombrePieza = ""
-materialPieza = ""
-diametroInicial = 0.0
-diametroFinal = 0.0
-longitudCorte = 0.0
-
-# Máquina
-nombreMaquina = ""
-
-# Material
-nombreMaterial = ""
-velocidadCorteMaterial = 0
-avanvePorRevolucionMaterial = 0.0
-fuerzaCorteMaterial = 0
-
-# Estados
+# Variables globales (estado guardado)
 piezaGuardada = False
 maquinaGuardada = False
 materialGuardado = False
 
+# Datos almacenados
+datos = {}
 
-# =================== GUARDAR PIEZA ===================
-def guardapieza(event):
-    global nombrePieza, diametroInicial, diametroFinal, longitudCorte, piezaGuardada
+def guardar_pieza(event):
+    global piezaGuardada
+    datos["diametro_inicial"] = float(js.document.getElementById("diametroInicial").value)
+    datos["diametro_final"] = float(js.document.getElementById("diametroFinal").value)
+    datos["longitud_corte"] = float(js.document.getElementById("longitudCorte").value)
 
-    try:
-        diametroInicial = float(Element("diametroInicial").value)
-        diametroFinal = float(Element("diametroFinal").value)
-        longitudCorte = float(Element("longitudCorte").value)
-        nombrePieza = "Pieza"     # Si deseas pedir nombre puedes agregar campo luego
-
-        piezaGuardada = True
-        Element("resultado").element.innerText = "✔ Datos de PIEZA guardados"
-    except:
-        Element("resultado").element.innerText = "❌ Error: datos inválidos en pieza"
+    piezaGuardada = True
+    pyscript.write("resultado", "✔ Parámetros de PIEZA guardados.")
 
 
-# =================== GUARDAR MÁQUINA ===================
-def guardarMaquina(event):
-    global nombreMaquina, maquinaGuardada
+def guardar_maquina(event):
+    global maquinaGuardada
+    datos["nombre_maquina"] = js.document.getElementById("nombreMaquina").value
 
-    try:
-        nombreMaquina = Element("nombreMaquina").value
-        maquinaGuardada = True
-        Element("resultado").element.innerText = "✔ Datos de MÁQUINA guardados"
-    except:
-        Element("resultado").element.innerText = "❌ Error: datos inválidos en máquina"
+    maquinaGuardada = True
+    pyscript.write("resultado", "✔ Parámetros de MÁQUINA guardados.")
 
 
-# =================== GUARDAR MATERIAL ===================
-def guardarmaterial(event):
-    global nombreMaterial, materialPieza, velocidadCorteMaterial, avanvePorRevolucionMaterial, fuerzaCorteMaterial, materialGuardado
+def guardar_material(event):
+    global materialGuardado
+    datos["nombre_material"] = js.document.getElementById("nombreMaterial").value
+    datos["velocidad"] = float(js.document.getElementById("velocidadCorteMaterial").value)
+    datos["avance"] = float(js.document.getElementById("avanceMaterial").value)
+    datos["fuerza"] = float(js.document.getElementById("fuerzaCorteMaterial").value)
 
-    try:
-        nombreMaterial = Element("nombreMaterial").value
-        materialPieza = nombreMaterial  # La pieza usará este material
-
-        velocidadCorteMaterial = int(Element("velocidadCorteMaterial").value)
-        avanvePorRevolucionMaterial = float(Element("avanceMaterial").value)
-        fuerzaCorteMaterial = int(Element("fuerzaCorteMaterial").value)
-
-        materialGuardado = True
-        Element("resultado").element.innerText = "✔ Datos de MATERIAL guardados"
-    except:
-        Element("resultado").element.innerText = "❌ Error: datos inválidos en material"
+    materialGuardado = True
+    pyscript.write("resultado", "✔ Parámetros de MATERIAL guardados.")
 
 
-# =================== EJECUTAR PROCESO ===================
 def ejecutar(event):
-    global piezaGuardada, maquinaGuardada, materialGuardado
-
-    if not piezaGuardada:
-        Element("resultado").element.innerText = "⚠️ Falta guardar PIEZA"
+    if not (piezaGuardada and maquinaGuardada and materialGuardado):
+        pyscript.write("resultado", "❌ Primero guarde pieza, máquina y material.")
         return
 
-    if not maquinaGuardada:
-        Element("resultado").element.innerText = "⚠️ Falta guardar MÁQUINA"
-        return
-
-    if not materialGuardado:
-        Element("resultado").element.innerText = "⚠️ Falta guardar MATERIAL"
-        return
-
-    # Ejecutamos tu método principal
+    # Llamada a tu método principal
     resultado = metodos.main(
-        nombrePieza,
-        materialPieza,
-        diametroInicial,
-        diametroFinal,
-        longitudCorte,
-        nombreMaquina,
-        velocidadCorteMaterial,
-        avanvePorRevolucionMaterial,
-        fuerzaCorteMaterial
+        datos["nombre_material"],
+        datos["nombre_maquina"],
+        datos["diametro_inicial"],
+        datos["diametro_final"],
+        datos["longitud_corte"],
+        datos["velocidad"],
+        datos["avance"],
+        datos["fuerza"]
     )
 
-    Element("resultado").element.innerText = resultado
+    pyscript.write("resultado", resultado)
 
+
+# ======== ENLAZAR EVENTOS ========
+js.document.getElementById("btnGuardarPieza").addEventListener("click", guardar_pieza)
+js.document.getElementById("btnGuardarMaquina").addEventListener("click", guardar_maquina)
+js.document.getElementById("btnGuardarMaterial").addEventListener("click", guardar_material)
+js.document.getElementById("btnEjecutar").addEventListener("click", ejecutar)
