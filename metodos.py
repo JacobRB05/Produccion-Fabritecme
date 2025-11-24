@@ -70,7 +70,7 @@ tiempoProceso = mapaProcesos["Corte Eje"].getTiempoProceso()
 print(f"El tiempo del proceso es: {tiempoProceso} minutos")
 
 volumenViruta = mapaProcesos["Corte Eje"].getVolumenVirutaRemovido()
-print(f"El volumen de viruta removido es: {volumenViruta} mm³")
+print(f"El volumen de viruta removido es: {volumenViruta} cm³")
 
 potenciaCorte = mapaProcesos["Corte Eje"].getPotenciaCorte()
 print(f"La potencia de corte es: {potenciaCorte} kW")   
