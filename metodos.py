@@ -52,6 +52,6 @@ print(f"El tiempo del proceso es: {tiempoProceso} minutos")
 volumenViruta = mapaProcesos["Corte Eje"].getVolumenVirutaRemovido()
 print(f"El volumen de viruta removido es: {volumenViruta} mm³")
 
-potenciaCorte = (mapaProcesos["Corte Eje"].maquina.getFuerzaCorte(pieza.material) * avancePorMinuto) / 60000
+potenciaCorte = mapaProcesos["Corte Eje"].getPotenciaCorte()
 print(f"La potencia de corte es: {potenciaCorte} kW")   
 print("hola mundo")
