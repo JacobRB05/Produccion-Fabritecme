@@ -2,9 +2,8 @@
 from pyscript import document
 
 
-def guardarPieza(event):
-    input_nombrePieza = document.querySelector("#nombrePieza")
-    nombrePieza = input_nombrePieza.value
-    output_div = document.querySelector("#output")  
-    output_div.innerHTML = f"El valor ingresado es: {nombrePieza}"
-    
+def translate_english(event):
+    input_text = document.querySelector("#english")
+    english = input_text.value
+    output_div = document.querySelector("#output")
+    output_div.innerText = english
