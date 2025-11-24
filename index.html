@@ -1,18 +1,49 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width,initial-scale=1" />
-      <title>🦜 Polyglot - Piratical PyScript</title>
-      <link rel="stylesheet" href="https://pyscript.net/releases/2025.11.1/core.css">
-      <script type="module" src="https://pyscript.net/releases/2025.11.1/core.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Calculo de procesos Fabritecme 🛠️</title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.3.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2025.3.1/core.js"></script>
+        <style>
+        body { font-family: Arial; padding: 20px; }
+        .bloque {
+            border: 2px solid #555; border-radius: 8px; padding: 15px;
+            margin-bottom: 20px;
+        }
+        input { width: 180px; margin: 4px 0; padding: 5px; }
+        .btn { padding: 6px 12px; margin-top: 5px; cursor: pointer; }
+        #resultado {
+            border: 1px dashed #000; padding: 15px; margin-top: 20px;
+            min-height: 30px; white-space: pre-wrap;
+        }
+    </style>
+      
   </head>
   <body>
-    <h1>Polyglot 🦜 💬 🇬🇧 ➡️ 🏴‍☠️</h1>
-    <p>Translate English into Pirate speak...</p>
-    <input type="text" id="english" placeholder="Type English here..." />
-    <button py-click="translate_english">Translate</button>
+    <h1>Calculo de procesos Fabritecme 🛠️</h1>
+      
+    <h2>Parámetros</h2>
+    <label> 📐 Paremtros objeto</label><br>
+    <label>Diámetro Inicial (mm)</label><br>
+    <input type="number" id="diametroInicial" placeholder="50" /><br>
+    <label>Diámetro Final (mm)</label><br>
+    <input type="number" id="diametroFinal" placeholder="30" /><br>
+    <label>Longitud de Corte (mm)</label><br>
+    <input type="number" id="longitudCorte" placeholder="100" /><br>
+      <label>🧱 Paremtros material</label><br>
+    <label>Material</label><br>
+    <input type="text" id="nombreMaterial" placeholder="Material de la Pieza (Acero)" /><br>
+      <br>
+    <button py-click="guardar">Guardar y Calcular</button>
+    <input type="text" id="velocidadCorteMaterial" placeholder="Velocidad de corte del material (150)" />
+    <input type="text" id="avanceMaterial" placeholder="Diametro Inicial (50)" />
+    <input type="text" id="fuerzaCorteMaterial" placeholder="Avance por revolución (0.2)" />
+    <input type="text" id="nombreMaquina" placeholder="Fuerza del corte del Material (500)" />
+
+    
     <div id="output"></div>
-    <script type="py" src="./main.py"></script>
+    <script type="py" src="./main.py" config="./pyscript.json"></script>
   </body>
 </html>

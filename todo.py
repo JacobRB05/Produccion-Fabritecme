@@ -1,37 +1,4 @@
 
-from pyscript import document
-
-
-def guardar(event):
-    nombrepieza = "Pieza"
-
-    #Esto es toda la estructura que atiende 
-    #a una de las cajitas
-    input_di = document.querySelector("#diametroInicial")
-    diametroInicial = input_di.value
-
-    #El resto de cajitas
-    input_df = document.querySelector("#diametroFinal")
-    diametroFinal = input_df.value
-    input_l = document.querySelector("#longitudCorte")
-    longitudCorte = input_l.value
-    input_nM = document.querySelector("#nombreMaterial")
-    nombreMaterial = input_nM.value
-    output_div = document.querySelector("#output")
-
-    #Falta tener la conversión a Int o float de lo necesario
-
-    #Esto es una prueba de que sí se están tomando los parámetros
-    res = diametroInicial + diametroFinal + longitudCorte + nombreMaterial +"\n"
-
-    #Esto es una prueba de que si funciona python, 
-    #cuando tengas todo usa main(p1,p2,...) en vez de
-    #main2(), si acaso mira que hace
-    #TE AMOOOOO
-    
-    res+= main2()
-    output_div.innerText = (res)
-
 class Pieza:
     nombrePieza:str
     material: str
@@ -181,7 +148,7 @@ def main(nombrePieza:str, materialPieza:str, diametroInicial:float, diametroFina
     agregarNuevoProceso("Proceso", diametroInicial, diametroFinal,longitudCorte,nombreMaquina, nombrePieza)
     return getmsg()
 
-def main2():
+if __name__ == "__main__":
     #inputs
         #Parametros Pieza
     diametroInicial = 50
@@ -196,4 +163,6 @@ def main2():
     avanvePorRevolucionMaterial = 0.2
     fuerzaCorteMaterial = 500
     msg = main(nombrePieza, materialPieza, diametroInicial, diametroFinal, longitudCorte, nombreMaquina, velocidadCorteMaterial, avanvePorRevolucionMaterial, fuerzaCorteMaterial)
-    return msg
+    print(msg)
+
+
