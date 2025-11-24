@@ -43,13 +43,16 @@ diametroInicial = 50
 diametroFinal = 30
 longitudCorte = 100
 nombreMaquina = "Torno CNC"
+nombreMaterial = "Acero"
+velocidadCorteMaterial = 150
+avanvePorRevolucionMaterial = 0.2
+fuerzaCorteMaterial = 500
 
 
 # Crear maquina, agregar materiales, crear pieza y proceso
 
 agregarMaquinaCorte(nombreMaquina)
-agregarMaterialMaquina(nombreMaquina, "Acero", 150, 0.2, 500)
-agregarMaterialMaquina(nombreMaquina,"Aluminio", 300, 0.3, 200)
+agregarMaterialMaquina(nombreMaquina, nombreMaterial, velocidadCorteMaterial, avanvePorRevolucionMaterial, fuerzaCorteMaterial)
 agregarPieza("Eje", "Acero")
 agregarNuevoProceso("Corte Eje", diametroInicial, diametroFinal,longitudCorte,nombreMaquina, "Eje")
 
