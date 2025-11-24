@@ -1,23 +1,113 @@
 <!DOCTYPE html>
 <html>
-  <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width,initial-scale=1" />
-      <title>Calculo de procesos Fabritecme 🛠️</title>
-      <link rel="stylesheet" href="https://pyscript.net/releases/2025.11.1/core.css">
-      <script type="module" src="https://pyscript.net/releases/2025.11.1/core.js"></script>
-  </head>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Calculo de procesos Fabritecme 🛠️</title>
+
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.11.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2025.11.1/core.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .bloque {
+            border: 2px solid #555;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .bloque h2 {
+            margin-top: 0;
+        }
+        input {
+            margin: 5px 0;
+            width: 180px;
+            padding: 4px;
+        }
+        .btn {
+            padding: 6px 12px;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+        #output {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px dashed #333;
+            background:#fafafa;
+        }
+    </style>
+</head>
+
 <body>
-  <h1>Bienventido a la interfaz de procesos de Fabritecme</h1>
-  <p>Ingrese un numero para cuadruplicar</p>
+
+<h1>Panel de parámetros – Fabritecme</h1>
+
+<!-- =============================== -->
+<!-- 📦 PARÁMETROS DE LA PIEZA -->
+<!-- =============================== -->
+<div class="bloque">
+    <h2>📐 Parámetros de la Pieza</h2>
+
+    <label>Diámetro Inicial (mm)</label><br>
+    <input id="diametroInicial" type="number" value="50"><br>
+
+    <label>Diámetro Final (mm)</label><br>
+    <input id="diametroFinal" type="number" value="30"><br>
+
+    <label>Longitud de Corte (mm)</label><br>
+    <input id="longitudCorte" type="number" value="100"><br>
+
+    <button class="btn" py-click="guardarPieza">Guardar Parámetros de Pieza</button>
+</div>
 
 
-  <input type="text" name="button1" id="button1" placeholder="Ingrese el n" />
-  <button py-click="funcion1">Translate</button>
-  <div id="output"></div>
+<!-- =============================== -->
+<!-- ⚙️ PARÁMETROS DE LA MÁQUINA -->
+<!-- =============================== -->
+<div class="bloque">
+    <h2>⚙️ Parámetros de la Máquina</h2>
+
+    <label>Nombre de la Máquina</label><br>
+    <input id="nombreMaquina" type="text" value="Torno CNC"><br>
+
+    <button class="btn" py-click="guardarMaquina">Guardar Parámetros de Máquina</button>
+</div>
 
 
-  <script type="py" src="./main.py" config="./pyscript.json"></script>
+<!-- =============================== -->
+<!-- 🧱 PARÁMETROS DEL MATERIAL -->
+<!-- =============================== -->
+<div class="bloque">
+    <h2>🧱 Parámetros del Material</h2>
+
+    <label>Material</label><br>
+    <input id="nombreMaterial" type="text" value="Acero"><br>
+
+    <label>Velocidad de Corte (m/min)</label><br>
+    <input id="velocidadCorteMaterial" type="number" value="150"><br>
+
+    <label>Avance por revolución (mm/rev)</label><br>
+    <input id="avanceMaterial" type="number" step="0.01" value="0.2"><br>
+
+    <label>Fuerza de Corte (N)</label><br>
+    <input id="fuerzaCorteMaterial" type="number" value="500"><br>
+
+    <button class="btn" py-click="guardarMaterial">Guardar Parámetros del Material</button>
+</div>
+
+
+<!-- ================== EJECUTAR MAIN ================== -->
+  <h2>Ejecutar proceso</h2>
+  <button py-click="ejecutar">Calcular y mostrar</button>
+
+  <div id="resultado" style="border:1px solid #000; padding:10px; margin-top:10px;">
+  </div>
+
+
+  <script type="py" src="./main.py"></script>
+
 </body>
-
 </html>

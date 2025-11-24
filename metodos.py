@@ -37,44 +37,59 @@ def agregarMaterialMaquina(nombreMaquina:str, material:str, velocidadCorte:int, 
         print(f"La maquina {nombreMaquina} no existe en el mapa de maquinas.")
 
 
-#inputs
 
-diametroInicial = 50
-diametroFinal = 30
-longitudCorte = 100
-nombreMaquina = "Torno CNC"
-nombreMaterial = "Acero"
-velocidadCorteMaterial = 150
-avanvePorRevolucionMaterial = 0.2
-fuerzaCorteMaterial = 500
+
+def getmsg():
+    msg = ""
+    velocidadRotacion = mapaProcesos["Corte Eje"].getVelocidadRotacion()
+    msg+= f"La velocidad de rotacion es: {velocidadRotacion} RPM" + "\n"
+
+    avancePorMinuto = mapaProcesos["Corte Eje"].getAvancePorMinuto()
+    msg+= f"El avance por minuto es: {avancePorMinuto} mm/min"+ "\n"
+
+    profundidadPasada = mapaProcesos["Corte Eje"].profundidadPasada
+    msg+= f"La profundidad de pasada es: {profundidadPasada} mm"+ "\n"
+
+    tiempoProceso = mapaProcesos["Corte Eje"].getTiempoProceso()
+    msg+= f"El tiempo del proceso es: {tiempoProceso} minutos"+  "\n"
+
+    volumenViruta = mapaProcesos["Corte Eje"].getVolumenVirutaRemovido()
+    msg+= f"El volumen de viruta removido es: {volumenViruta} cm³" + "\n"
+
+    potenciaCorte = mapaProcesos["Corte Eje"].getPotenciaCorte()
+    msg+= f"La potencia de corte es: {potenciaCorte} kW"+ "\n"
+    return msg
+
+
 
 
 # Crear maquina, agregar materiales, crear pieza y proceso
+def main(nombrePieza:str, materialPieza:str, diametroInicial:float, diametroFinal:float, longitudCorte:float, nombreMaquina:str, velocidadCorteMaterial:int, avanvePorRevolucionMaterial:float, fuerzaCorteMaterial:int):
+    agregarMaquinaCorte(nombreMaquina)
+    agregarMaterialMaquina(nombreMaquina, materialPieza, velocidadCorteMaterial, avanvePorRevolucionMaterial, fuerzaCorteMaterial)
+    agregarPieza(nombrePieza, materialPieza)
+    agregarNuevoProceso("Proceso", diametroInicial, diametroFinal,longitudCorte,nombreMaquina, nombrePieza)
+    return getmsg()
 
-agregarMaquinaCorte(nombreMaquina)
-agregarMaterialMaquina(nombreMaquina, nombreMaterial, velocidadCorteMaterial, avanvePorRevolucionMaterial, fuerzaCorteMaterial)
-agregarPieza("Eje", "Acero")
-agregarNuevoProceso("Corte Eje", diametroInicial, diametroFinal,longitudCorte,nombreMaquina, "Eje")
+if __name__ == "__main__":
+    #inputs
+
+        #Parametros Pieza
+    diametroInicial = 50
+    diametroFinal = 30
+    longitudCorte = 100
+    
+    nombrePieza = "Pieza"
+    materialPieza = "Acero"
+
+        #Parametros Maquina
+    nombreMaquina = "Torno CNC"
+        #Parametros Material
+    velocidadCorteMaterial = 150
+    avanvePorRevolucionMaterial = 0.2
+    fuerzaCorteMaterial = 500
+    msg = main()
+    print(msg)
 
 
-#outputs
 
-
-velocidadRotacion = mapaProcesos["Corte Eje"].getVelocidadRotacion()
-print(f"La velocidad de rotacion es: {velocidadRotacion} RPM")
-
-avancePorMinuto = mapaProcesos["Corte Eje"].getAvancePorMinuto()
-print(f"El avance por minuto es: {avancePorMinuto} mm/min")
-
-profundidadPasada = mapaProcesos["Corte Eje"].profundidadPasada
-print(f"La profundidad de pasada es: {profundidadPasada} mm")
-
-tiempoProceso = mapaProcesos["Corte Eje"].getTiempoProceso()
-print(f"El tiempo del proceso es: {tiempoProceso} minutos")
-
-volumenViruta = mapaProcesos["Corte Eje"].getVolumenVirutaRemovido()
-print(f"El volumen de viruta removido es: {volumenViruta} cm³")
-
-potenciaCorte = mapaProcesos["Corte Eje"].getPotenciaCorte()
-print(f"La potencia de corte es: {potenciaCorte} kW")   
-print("hola mundo")
