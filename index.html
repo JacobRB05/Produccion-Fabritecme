@@ -7,7 +7,14 @@
 
     <link rel="stylesheet" href="https://pyscript.net/releases/2025.11.1/core.css">
     <script type="module" src="https://pyscript.net/releases/2025.11.1/core.js"></script>
-    <py-config src="pyscript.json"></py-config>
+
+    <!-- CONFIG -->
+    <py-config>
+    {
+        "packages": [],
+        "paths": ["./"]   // IMPORTANTE para poder usar metodos.py y clases.py
+    }
+    </py-config>
 
     <style>
         body { font-family: Arial; padding: 20px; }
@@ -18,7 +25,8 @@
         input { width: 180px; margin: 4px 0; padding: 5px; }
         .btn { padding: 6px 12px; margin-top: 5px; cursor: pointer; }
         #resultado {
-            border: 1px dashed #000; padding: 15px; margin-top: 20px; min-height: 30px;
+            border: 1px dashed #000; padding: 15px; margin-top: 20px;
+            min-height: 30px; white-space: pre-wrap;
         }
     </style>
 </head>
@@ -27,9 +35,7 @@
 
 <h1>Panel de parámetros – Fabritecme</h1>
 
-<!-- =============================== -->
-<!-- 📦 PARÁMETROS DE LA PIEZA -->
-<!-- =============================== -->
+<!-- 📐 PIEZA -->
 <div class="bloque">
     <h2>📐 Parámetros de la Pieza</h2>
 
@@ -45,10 +51,7 @@
     <button class="btn" id="btnGuardarPieza">Guardar Pieza</button>
 </div>
 
-
-<!-- =============================== -->
-<!-- ⚙️ PARÁMETROS DE LA MÁQUINA -->
-<!-- =============================== -->
+<!-- ⚙️ MÁQUINA -->
 <div class="bloque">
     <h2>⚙️ Parámetros de la Máquina</h2>
 
@@ -58,10 +61,7 @@
     <button class="btn" id="btnGuardarMaquina">Guardar Máquina</button>
 </div>
 
-
-<!-- =============================== -->
-<!-- 🧱 PARÁMETROS DEL MATERIAL -->
-<!-- =============================== -->
+<!-- 🧱 MATERIAL -->
 <div class="bloque">
     <h2>🧱 Parámetros del Material</h2>
 
@@ -80,13 +80,12 @@
     <button class="btn" id="btnGuardarMaterial">Guardar Material</button>
 </div>
 
-
-<!-- ================== EJECUTAR MAIN ================== -->
 <h2>Ejecutar proceso</h2>
 <button id="btnEjecutar" class="btn">Calcular y Mostrar</button>
 
 <div id="resultado"></div>
 
+<!-- CARGAR MAIN -->
 <script type="py" src="main.py"></script>
 
 </body>
