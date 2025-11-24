@@ -41,22 +41,22 @@ def agregarMaterialMaquina(nombreMaquina:str, material:str, velocidadCorte:int, 
 
 def getmsg():
     msg = ""
-    velocidadRotacion = mapaProcesos["Corte Eje"].getVelocidadRotacion()
+    velocidadRotacion = mapaProcesos["Proceso"].getVelocidadRotacion()
     msg+= f"La velocidad de rotacion es: {velocidadRotacion} RPM" + "\n"
 
-    avancePorMinuto = mapaProcesos["Corte Eje"].getAvancePorMinuto()
+    avancePorMinuto = mapaProcesos["Proceso"].getAvancePorMinuto()
     msg+= f"El avance por minuto es: {avancePorMinuto} mm/min"+ "\n"
 
-    profundidadPasada = mapaProcesos["Corte Eje"].profundidadPasada
+    profundidadPasada = mapaProcesos["Proceso"].profundidadPasada
     msg+= f"La profundidad de pasada es: {profundidadPasada} mm"+ "\n"
 
-    tiempoProceso = mapaProcesos["Corte Eje"].getTiempoProceso()
+    tiempoProceso = mapaProcesos["Proceso"].getTiempoProceso()
     msg+= f"El tiempo del proceso es: {tiempoProceso} minutos"+  "\n"
 
-    volumenViruta = mapaProcesos["Corte Eje"].getVolumenVirutaRemovido()
+    volumenViruta = mapaProcesos["Proceso"].getVolumenVirutaRemovido()
     msg+= f"El volumen de viruta removido es: {volumenViruta} cm³" + "\n"
 
-    potenciaCorte = mapaProcesos["Corte Eje"].getPotenciaCorte()
+    potenciaCorte = mapaProcesos["Proceso"].getPotenciaCorte()
     msg+= f"La potencia de corte es: {potenciaCorte} kW"+ "\n"
     return msg
 
@@ -88,7 +88,7 @@ if __name__ == "__main__":
     velocidadCorteMaterial = 150
     avanvePorRevolucionMaterial = 0.2
     fuerzaCorteMaterial = 500
-    msg = main()
+    msg = main(nombrePieza, materialPieza, diametroInicial, diametroFinal, longitudCorte, nombreMaquina, velocidadCorteMaterial, avanvePorRevolucionMaterial, fuerzaCorteMaterial)
     print(msg)
 
 

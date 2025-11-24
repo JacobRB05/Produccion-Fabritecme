@@ -1,4 +1,7 @@
-
 {
-    "packages": ["arrr"]
+  "packages": [],
+  "files": [
+    "metodos.py",
+    "clases.py"
+  ]
 }
