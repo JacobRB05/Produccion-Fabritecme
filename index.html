@@ -24,24 +24,27 @@
   <body>
     <h1>Calculo de procesos Fabritecme 🛠️</h1>
       
-    <h2>Parámetros</h2>
-    <label> 📐 Paremtros objeto</label><br>
+    <label>Ingrese todos los parámetros indicados</label>
+    <h2> 📐 Paremtros objeto</h2>
     <label>Diámetro Inicial (mm)</label><br>
-    <input type="number" id="diametroInicial" placeholder="50" /><br>
+    <input type="number" step= "0.01" id="diametroInicial" placeholder="50" /><br>
     <label>Diámetro Final (mm)</label><br>
-    <input type="number" id="diametroFinal" placeholder="30" /><br>
+    <input type="number" step= "0.01" id="diametroFinal" placeholder="30" /><br>
     <label>Longitud de Corte (mm)</label><br>
-    <input type="number" id="longitudCorte" placeholder="100" /><br>
-      <label>🧱 Paremtros material</label><br>
+    <input type="number" step= "0.01" id="longitudCorte" placeholder="100" /><br>
+      <br>
+      <h2>🧱 Paremtros material</h2>
     <label>Material</label><br>
     <input type="text" id="nombreMaterial" placeholder="Material de la Pieza (Acero)" /><br>
-      <br>
+    <label>🏃 Velocidad de corte del material</label><br>
+    <input type="number" id="velocidadCorteMaterial" placeholder="150" /><br>
+    <label>🏁 Avance por revolución</label><br>
+    <input type="number" step= "0.01" id="avanceMaterial" placeholder="0.2" /><br>
+    <label>💪 Fuerza del corte del Material</label><br>
+    <input type="number" id="fuerzaCorteMaterial" placeholder="500" /><br>
+    <label>Nombre de la máquina</label><br>
+    <input type="text" id="nombreMaquina" placeholder="Torno CNC" /><br>
     <button py-click="guardar">Guardar y Calcular</button>
-    <input type="text" id="velocidadCorteMaterial" placeholder="Velocidad de corte del material (150)" />
-    <input type="text" id="avanceMaterial" placeholder="Diametro Inicial (50)" />
-    <input type="text" id="fuerzaCorteMaterial" placeholder="Avance por revolución (0.2)" />
-    <input type="text" id="nombreMaquina" placeholder="Fuerza del corte del Material (500)" />
-
     
     <div id="output"></div>
     <script type="py" src="./main.py" config="./pyscript.json"></script>

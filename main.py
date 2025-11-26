@@ -1,4 +1,5 @@
 
+
 from pyscript import document
 
 
@@ -19,17 +20,30 @@ def guardar(event):
     nombreMaterial = input_nM.value
     output_div = document.querySelector("#output")
 
+    #input cajitas que faltaban
+    input_vel = document.querySelector("#velocidadCorteMaterial")
+    velocidadCorte = input_vel.value
+    input_av = document.querySelector("#avanceMaterial")
+    avanceMaterial = input_av.value
+    input_fu = document.querySelector("#fuerzaCorteMaterial")
+    fuerzaCorte = input_fu.value
+    input_nom = document.querySelector("#nombreMaquina")
+    nombreMaquina = input_nom.value
+    
+
     #Falta tener la conversión a Int o float de lo necesario
 
     #Esto es una prueba de que sí se están tomando los parámetros
-    res = diametroInicial + diametroFinal + longitudCorte + nombreMaterial +"\n"
+    #Respuestas del usuario
+    #res = diametroInicial + diametroFinal + longitudCorte + nombreMaterial +velocidadCorte+avanceMaterial+fuerzaCorte+nombreMaquina+"\n"
 
+    res = "\n"
     #Esto es una prueba de que si funciona python, 
     #cuando tengas todo usa main(p1,p2,...) en vez de
     #main2(), si acaso mira que hace
     #TE AMOOOOO
     
-    res+= main2()
+    res+= main2(diametroInicial, diametroFinal, longitudCorte, nombreMaterial, velocidadCorte, avanceMaterial, fuerzaCorte, nombreMaquina)
     output_div.innerText = (res)
 
 class Pieza:
@@ -44,19 +58,19 @@ class MaquinaCorte:
     
     nombreMaquina:str
     velocidadCorte: dict [str, int]
-    avancePorRevolucion: dict [str, int]
+    avancePorRevolucion: dict [str, float]
     fuerzaCorte: dict [str, int]
    
     def __init__(self, nombreMaquina:str):
         self.nombreMaquina = nombreMaquina
         self.velocidadCorte: dict[str, int] = {}
-        self.avancePorRevolucion: dict[str, int] = {}
+        self.avancePorRevolucion: dict[str, float] = {}
         self.fuerzaCorte: dict[str, int] = {}
             
-    def agregarMaterial(self, material:str, velocidadCorte:int, avancePorRevolucion:int,fuerazaCorte:int):
+    def agregarMaterial(self, material:str, velocidadCorte:int, avancePorRevolucion:float,fuerzaCorte:int):
         self.velocidadCorte[material] = velocidadCorte
         self.avancePorRevolucion[material] = avancePorRevolucion
-        self.fuerzaCorte[material] = fuerazaCorte
+        self.fuerzaCorte[material] = fuerzaCorte
 
     def getVelocidadMaterial(self,material:str):
         return self.velocidadCorte[material]
@@ -70,19 +84,19 @@ class MaquinaCorte:
 class ProcesoCorte:
     nombreProceso:str
     
-    diametroInicialPieza:int
-    diametroFinalPieza:int
-    longitudCorte:int
+    diametroInicialPieza:float
+    diametroFinalPieza:float
+    longitudCorte:float
     pieza:Pieza
     maquina:MaquinaCorte
     
     profundidadPasada:int
     volumenVirutaRemovido:int
 
-    velocdadRotacion:int
+    velocdadRotacion:float
     
 
-    def __init__(self, nombreProceso:str, DiametroInicialPieza:int, DiametroFinalPieza:int,longitudCorte:int, maquina:MaquinaCorte,pieza:Pieza):
+    def __init__(self, nombreProceso:str, DiametroInicialPieza:float, DiametroFinalPieza:float,longitudCorte:float, maquina:MaquinaCorte,pieza:Pieza):
         self.nombreProceso = nombreProceso
         self.diametroInicialPieza = DiametroInicialPieza
         self.diametroFinalPieza = DiametroFinalPieza
@@ -123,9 +137,10 @@ mapaPiezas = {}
 
 
 # Funciones para manejar los procesos de corte
-def agregarNuevoProceso(nombreProceso:str, DiametroInicialPieza:int, DiametroFinalPieza:int,longitudCorte:int, nombreMaquina: str, nombrePieza:str):
+def agregarNuevoProceso(nombreProceso:str, DiametroInicialPieza:float, DiametroFinalPieza:float,longitudCorte:float, nombreMaquina: str, nombrePieza:str):
     pieza = mapaPiezas.get(nombrePieza)
-    proceso = ProcesoCorte(nombreProceso, DiametroInicialPieza, DiametroFinalPieza,longitudCorte, mapaMaquinas.get(nombreMaquina), pieza)
+    maquina = mapaMaquinas.get(nombreMaquina)
+    proceso = ProcesoCorte(nombreProceso, DiametroInicialPieza, DiametroFinalPieza,longitudCorte, maquina, pieza)
     mapaProcesos[nombreProceso] = proceso
 
 
@@ -139,7 +154,7 @@ def agregarMaquinaCorte(nombreMaquina:str):
     mapaMaquinas[nombreMaquina] = maquina
     return maquina
 
-def agregarMaterialMaquina(nombreMaquina:str, material:str, velocidadCorte:int, avancePorRevolucion:int,fuerzaCorte:int):
+def agregarMaterialMaquina(nombreMaquina:str, material:str, velocidadCorte:int, avancePorRevolucion:float,fuerzaCorte:int):
     maquina = mapaMaquinas.get(nombreMaquina)
     if maquina:
         maquina.agregarMaterial(material, velocidadCorte, avancePorRevolucion,fuerzaCorte)
@@ -150,50 +165,57 @@ def agregarMaterialMaquina(nombreMaquina:str, material:str, velocidadCorte:int, 
 
 
 def getmsg():
+    UNDERLINE = "\033[4m"
+    RESET = "\033[0m"
     msg = ""
+    
     velocidadRotacion = mapaProcesos["Proceso"].getVelocidadRotacion()
-    msg+= f"La velocidad de rotacion es: {velocidadRotacion} RPM" + "\n"
-
+    msg+= f"La velocidad de rotacion es: {round(velocidadRotacion,3)} RPM" + "\n"
+    
     avancePorMinuto = mapaProcesos["Proceso"].getAvancePorMinuto()
-    msg+= f"El avance por minuto es: {avancePorMinuto} mm/min"+ "\n"
+    msg+= f"El avance por minuto es: {round(avancePorMinuto,3)} mm/min"+ "\n"
 
     profundidadPasada = mapaProcesos["Proceso"].profundidadPasada
-    msg+= f"La profundidad de pasada es: {profundidadPasada} mm"+ "\n"
+    msg+= f"La profundidad de pasada es: {round(profundidadPasada,3)} mm"+ "\n"
 
     tiempoProceso = mapaProcesos["Proceso"].getTiempoProceso()
-    msg+= f"El tiempo del proceso es: {tiempoProceso} minutos"+  "\n"
+    msg+= f"El tiempo del proceso es: {round(tiempoProceso,3)} minutos"+  "\n"
 
     volumenViruta = mapaProcesos["Proceso"].getVolumenVirutaRemovido()
-    msg+= f"El volumen de viruta removido es: {volumenViruta} cm³" + "\n"
+    msg+= f"El volumen de viruta removido es: {round(volumenViruta,3)} cm³" + "\n"
 
     potenciaCorte = mapaProcesos["Proceso"].getPotenciaCorte()
-    msg+= f"La potencia de corte es: {potenciaCorte} kW"+ "\n"
+    msg+= f"La potencia de corte es: {round(potenciaCorte,3)} kW"+ "\n"
+    
+    
     return msg
 
 
 
 
 # Crear maquina, agregar materiales, crear pieza y proceso
-def main(nombrePieza:str, materialPieza:str, diametroInicial:float, diametroFinal:float, longitudCorte:float, nombreMaquina:str, velocidadCorteMaterial:int, avanvePorRevolucionMaterial:float, fuerzaCorteMaterial:int):
+def main(nombrePieza:str, materialPieza:str, diametroInicial:float, diametroFinal:float, longitudCorte:float, nombreMaquina:str, velocidadCorteMaterial:int, avancePorRevolucionMaterial:float, fuerzaCorteMaterial:int):
     agregarMaquinaCorte(nombreMaquina)
-    agregarMaterialMaquina(nombreMaquina, materialPieza, velocidadCorteMaterial, avanvePorRevolucionMaterial, fuerzaCorteMaterial)
+    agregarMaterialMaquina(nombreMaquina, materialPieza, velocidadCorteMaterial, avancePorRevolucionMaterial, fuerzaCorteMaterial)
     agregarPieza(nombrePieza, materialPieza)
     agregarNuevoProceso("Proceso", diametroInicial, diametroFinal,longitudCorte,nombreMaquina, nombrePieza)
     return getmsg()
 
-def main2():
+def main2(diametroInicial, diametroFinal, longitudCorte, materialPieza, velocidadCorteMaterial, avancePorRevolucionMaterial, fuerzaCorteMaterial, nombreMaquina):
+    nombrePieza = "Pieza"
+    
     #inputs
         #Parametros Pieza
-    diametroInicial = 50
-    diametroFinal = 30
-    longitudCorte = 100 
-    nombrePieza = "Pieza"
-    materialPieza = "Acero"
+    diametroInicial = float(diametroInicial)
+    diametroFinal = float(diametroFinal)
+    longitudCorte = float(longitudCorte)
+    #materialPieza = "Acero"
         #Parametros Maquina
-    nombreMaquina = "Torno CNC"
+    #nombreMaquina = "Torno CNC"
         #Parametros Material
-    velocidadCorteMaterial = 150
-    avanvePorRevolucionMaterial = 0.2
-    fuerzaCorteMaterial = 500
-    msg = main(nombrePieza, materialPieza, diametroInicial, diametroFinal, longitudCorte, nombreMaquina, velocidadCorteMaterial, avanvePorRevolucionMaterial, fuerzaCorteMaterial)
+    velocidadCorteMaterial = int(velocidadCorteMaterial)
+    avancePorRevolucionMaterial = float(avancePorRevolucionMaterial)
+    fuerzaCorteMaterial = int(fuerzaCorteMaterial)
+    
+    msg = main(nombrePieza, materialPieza, diametroInicial, diametroFinal, longitudCorte, nombreMaquina, velocidadCorteMaterial, avancePorRevolucionMaterial, fuerzaCorteMaterial)
     return msg
